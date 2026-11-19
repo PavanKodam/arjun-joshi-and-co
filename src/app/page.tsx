@@ -1,9 +1,24 @@
+import Header from "@/components/layout/Header";
+import Hero from "@/components/home/Hero";
+import About from "@/components/home/About";
+import Founder from "@/components/home/Founder";
+import Services from "@/components/home/Services";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
+import Contact from "@/components/home/Contact";
+import Footer from "@/components/layout/Footer";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[#560406]  text-cream">
-        <h1 className="text-4xl font-bold">Arjun Joshi & Co.</h1>
-        <img src="/logo/logo-original.png" alt="Arjun Joshi & Co. Logo" className="w-64 h-64" />
-    </main>
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Founder />
+        <Services />
+        <WhyChooseUs />
+        <Footer />
+      </main>
+    </>
   );
 }
-/*520707 */

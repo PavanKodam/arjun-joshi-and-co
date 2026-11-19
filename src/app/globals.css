@@ -1,40 +1,37 @@
-/* @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
-
 @import "tailwindcss";
 
 @theme {
-  --color-burgundy: #650808;
-  --color-maroon: #420606;
-  --color-brown: #70402e;
-  --color-gold: #c6a15b;
-  --color-cream: #fff9f0;
-  --color-beige: #f3e9dc;
-  --color-charcoal: #201b19;
+  /* Tailwind CSS v4 theme directives are valid PostCSS at-rules. */
+  /* stylelint-disable at-rule-no-unknown */
+  --color-cream: #f5f0e6;
+  --color-sand: #e8ddc8;
+  --color-gold: #c6a66b;
+  --color-bronze: #8a6428;
+  --color-sage: #b9c5b0;
+  --color-mist: #a9b9c5;
+  --color-ink: #3b2a1d;
+  --color-charcoal: #4a3b2f;
+}
+
+@theme inline {
+  /* stylelint-enable at-rule-no-unknown */
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+}
+
+@utility site-container {
+  /* One shared page width + side padding, used by every section */
+  margin-inline: auto;
+  width: 100%;
+  max-width: 90rem;
+  padding-inline: 1rem;
+
+  @media (min-width: 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 64rem) {
+    padding-inline: 2.5rem;
+  }
 }
 
 html {
@@ -45,3 +42,133 @@ body {
   background: var(--color-cream);
   color: var(--color-charcoal);
 }
+
+section[id] { 
+  scroll-margin-top: 5rem;
+}
+
+/* ---------- Golden "live" animations ---------- */
+
+/* Light sweep across gold text (used as an overlay on the hero heading) */
+@keyframes shimmer-move {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+.gold-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    transparent 38%,
+    #fff1bd 50%,
+    transparent 62%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer-move 5s ease-in-out infinite;
+}
+
+/* Shine passing across gold buttons */
+@keyframes shine-sweep {
+  0%,
+  60% {
+    transform: translateX(-130%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(130%) skewX(-20deg);
+  }
+}
+.shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  transform: translateX(-130%) skewX(-20deg);
+  animation: shine-sweep 4.5s ease-in-out infinite;
+}
+
+/* Soft golden glow pulsing around the logo */
+@keyframes logo-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(198, 166, 107, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(198, 166, 107, 0.75));
+  }
+}
+.logo-glow {
+  animation: logo-glow 3.5s ease-in-out infinite;
+}
+
+/* Respect visitors who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .gold-shimmer,
+  .shine::after,
+  .logo-glow {
+    animation: none;
+  }
+}
+
+/* Hide the scrollbar on horizontal card tracks (still scrollable) */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Soft gold ring pulsing behind icons */
+@keyframes ring-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.ring-pulse {
+  animation: ring-pulse 3s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-pulse {
+    animation: none;
+    opacity: 0;
+  }
+}
+ 
+/* Soft coloured glows (much cheaper for phones than blur filters)*/
+.glow-gold {
+  background: radial-gradient(closest-side, rgba(198, 166, 107, 0.35), rgba(198, 166, 107, 0));
+}
+.glow-mist {
+  background: radial-gradient(closest-side, rgba(169, 185, 197, 0.5), rgba(169, 185, 197, 0));
+}
+.glow-sage {
+  background: radial-gradient(closest-side, rgba(185, 197, 176, 0.45), rgba(185, 197, 176, 0));
+} 
