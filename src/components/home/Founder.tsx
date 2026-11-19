@@ -17,43 +17,48 @@ const FACTS = [
 
 export default function Founder() {
   return (
-    <section id="founder" className="overflow-hidden bg-sand/60 py-14 sm:py-20 lg:py-28">
+    <section id="founder" className="overflow-hidden bg-sand/60 py-14 sm:py-20 lg:py-24">
       <div className="site-container grid items-center gap-10 lg:grid-cols-[1fr_0.8fr] lg:gap-14">
-        <Reveal x={-40} y={0} className="order-2 lg:order-1">
-          <h2 className="font-display text-3xl leading-tight text-ink sm:text-4xl">
-            Meet Our Founder – Arjun Joshi
+        <Reveal x={-30} y={0} className="order-2 lg:order-1">
+          <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-bronze sm:text-sm">
+            <span aria-hidden className="h-px w-8 bg-bronze" />
+            Our founder
+          </p>
+          <h2 className="mt-3 text-balance font-display text-3xl leading-tight text-ink sm:text-4xl">
+            Meet Arjun Joshi
           </h2>
           <p className="mt-2 font-medium text-charcoal/80">
             Founder &amp; Owner | Arjun Joshi &amp; Co.
           </p>
 
-          <div className="mt-6 space-y-4 leading-relaxed text-charcoal/80">
+          <div className="mt-6 space-y-4 text-sm leading-relaxed text-charcoal/80 sm:text-base">
             <p>
-              With over <strong>20 years of experience in the insurance
-                industry</strong>, Mr. Arjun Joshi is a well-recognised and
-              trusted insurance advisor in Bhiwandi.
+              With over <strong className="text-ink">20 years of experience in
+              the insurance industry</strong>, Mr. Arjun Joshi is a
+              well-recognised and trusted insurance advisor in Bhiwandi.
             </p>
             <p>
               A B.Com graduate with extensive industry knowledge, he has
               dedicated his professional journey to helping individuals,
-              families, and businesses make informed insurance decisions.
+              families and businesses make informed insurance decisions.
             </p>
             <p>
               His approach is built on three core values:{" "}
-              <strong>Trust, Transparency, and Customer Satisfaction.</strong>{" "}
-              He believes that insurance is not just about purchasing a
-              policy; it’s about understanding the right protection for every
+              <strong className="text-ink">
+                Trust, Transparency and Customer Satisfaction.
+              </strong>{" "}
+              He believes that insurance is not just about purchasing a policy;
+              it’s about understanding the right protection for every
               individual’s needs.
             </p>
             <p>
               Through Arjun Joshi &amp; Co., he aims to make insurance simple,
-              accessible, and affordable by guiding clients towards suitable
-              insurance solutions with complete transparency and personalised
-              assistance.
+              accessible and affordable by guiding clients towards suitable
+              solutions with complete transparency and personalised assistance.
             </p>
           </div>
 
-          <ul className="mt-8 flex flex-wrap gap-3">
+          <ul className="mt-7 flex flex-wrap gap-2.5">
             {VALUES.map(({ icon: Icon, label }) => (
               <li
                 key={label}
@@ -68,24 +73,24 @@ export default function Founder() {
           <dl className="mt-8 grid gap-x-8 gap-y-4 border-t border-ink/15 pt-6 sm:grid-cols-2">
             {FACTS.map((fact) => (
               <div key={fact.label}>
-                <dt className="text-sm text-charcoal/75">{fact.label}</dt>
+                <dt className="text-sm text-charcoal/70">{fact.label}</dt>
                 <dd className="font-medium text-charcoal">{fact.value}</dd>
               </div>
             ))}
           </dl>
         </Reveal>
 
-        <Reveal x={40} y={0} delay={0.1} className="order-1 lg:order-2">
-          <div className="relative mx-auto max-w-[15rem] sm:max-w-xs lg:max-w-md">
+        <Reveal x={30} y={0} delay={0.1} className="order-1 lg:order-2">
+          <div className="relative mx-auto max-w-[16rem] sm:max-w-xs lg:max-w-md">
             <div
               aria-hidden
-              className="absolute -bottom-4 -right-4 h-full w-full rounded-4xl bg-mist/50"
+              className="absolute -bottom-3 -right-3 h-full w-full rounded-3xl bg-mist/50 sm:-bottom-4 sm:-right-4 sm:rounded-4xl"
             />
             <PhotoFrame
               src="/images/founder.webp"
               alt="Arjun Joshi, Founder and Owner of Arjun Joshi & Co."
               sizes="(min-width: 1024px) 40vw, 90vw"
-              className="relative aspect-4/5 rounded-4xl shadow-lg"
+              className="relative aspect-4/5 rounded-3xl shadow-lg sm:rounded-4xl"
               imageClassName="object-cover object-top"
               fallback={<UserRound size={80} />}
             />

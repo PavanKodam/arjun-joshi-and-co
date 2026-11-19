@@ -1,24 +1,26 @@
-import Header from "@/components/layout/Header";
+import type { Metadata } from "next";
 import Hero from "@/components/home/Hero";
-import About from "@/components/home/About";
-import Founder from "@/components/home/Founder";
-import Services from "@/components/home/Services";
+import AboutPreview from "@/components/home/AboutPreview";
+import ServicesPreview from "@/components/services/ServicesPreview";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
-import Contact from "@/components/home/Contact";
-import Footer from "@/components/layout/Footer";
+import CtaBanner from "@/components/layout/CtaBanner";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Insurance Agency in Bhiwandi",
+  description:
+    "Arjun Joshi & Co. helps families and businesses in Bhiwandi with health, life, motor, fire, worker, transit and marine insurance, plus investment plans. 20+ years of experience.",
+  path: "/",
+});
 
 export default function Home() {
   return (
     <>
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Founder />
-        <Services />
-        <WhyChooseUs />
-        <Footer />
-      </main>
+      <Hero />
+      <AboutPreview />
+      <ServicesPreview />
+      <WhyChooseUs showLink />
+      <CtaBanner />
     </>
   );
 }

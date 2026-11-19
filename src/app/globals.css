@@ -36,15 +36,51 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--color-cream);
   color: var(--color-charcoal);
+  overflow-x: clip;
 }
 
-section[id] { 
-  scroll-margin-top: 5rem;
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 3px;
+}
+
+/* Skip link for keyboard and screen-reader visitors */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  border-radius: 9999px;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  padding: 0.65rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(59, 42, 29, 0.25);
+}
+
+/* Keep the fixed mobile action bar from covering footer content */
+@media (max-width: 63.999rem) {
+  body {
+    padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+  }
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
 }
 
 /* ---------- Golden "live" animations ---------- */
@@ -161,14 +197,26 @@ section[id] {
     opacity: 0;
   }
 }
- 
-/* Soft coloured glows (much cheaper for phones than blur filters)*/
+
+/* Soft coloured glows (much cheaper for phones than blur filters) */
 .glow-gold {
-  background: radial-gradient(closest-side, rgba(198, 166, 107, 0.35), rgba(198, 166, 107, 0));
+  background: radial-gradient(
+    closest-side,
+    rgba(198, 166, 107, 0.35),
+    rgba(198, 166, 107, 0)
+  );
 }
 .glow-mist {
-  background: radial-gradient(closest-side, rgba(169, 185, 197, 0.5), rgba(169, 185, 197, 0));
+  background: radial-gradient(
+    closest-side,
+    rgba(169, 185, 197, 0.5),
+    rgba(169, 185, 197, 0)
+  );
 }
 .glow-sage {
-  background: radial-gradient(closest-side, rgba(185, 197, 176, 0.45), rgba(185, 197, 176, 0));
-} 
+  background: radial-gradient(
+    closest-side,
+    rgba(185, 197, 176, 0.45),
+    rgba(185, 197, 176, 0)
+  );
+}

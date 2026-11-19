@@ -1,3 +1,4 @@
+import { SERVICES } from "@/lib/services";
 import { SITE, SITE_URL } from "@/lib/site";
 
 export default function StructuredData() {
@@ -45,6 +46,19 @@ export default function StructuredData() {
     ],
     areaServed: { "@type": "City", name: "Bhiwandi" },
     sameAs: [SITE.instagram],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Insurance and investment services",
+      itemListElement: SERVICES.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+          description: service.summary,
+          url: `${SITE_URL}/services/${service.id}`,
+        },
+      })),
+    },
   };
 
   return (

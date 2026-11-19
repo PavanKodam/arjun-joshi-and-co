@@ -8,6 +8,7 @@ import {
   type FormEvent,
   type ReactNode,
 } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import {
   LoaderCircle,
@@ -642,10 +643,14 @@ export default function EnquiryForm({
             <span>
               I agree to be contacted by Arjun Joshi &amp; Co. regarding my
               enquiry and understand that my information will be handled
-              according to the 
-              <span className="font-medium ml-1 text-gold/95 underline decoration-gold underline-offset-2">
-                 privacy policy.
-              </span>             
+              according to the{" "}
+              <Link
+                href="/privacy-policy"
+                className="font-medium text-bronze underline decoration-gold underline-offset-2"
+              >
+                privacy policy
+              </Link>
+              .
             </span>
           </label>
           {errors.consent && (

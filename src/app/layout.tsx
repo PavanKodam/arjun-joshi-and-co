@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Poppins } from "next/font/google";
 import Preloader from "@/components/layout/Preloader";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import MobileActionBar from "@/components/layout/MobileActionBar";
 import EnquiryProvider from "@/components/forms/EnquiryProvider";
 import StructuredData from "@/components/seo/StructuredData";
 import { IS_LIVE_SITE, SITE_URL } from "@/lib/site";
@@ -19,15 +22,17 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const TITLE = "Insurance Agent in Bhiwandi | Arjun Joshi & Co.";
+const TITLE = "Insurance Agency in Bhiwandi";
 const DESCRIPTION =
   "Arjun Joshi & Co. helps families and businesses in Bhiwandi with health, life, motor and other insurance, plus investment plans. 20+ years of experience.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: TITLE, template: "%s | Arjun Joshi & Co." },
+  title: {
+    default: `${TITLE} | Arjun Joshi & Co.`,
+    template: "%s | Arjun Joshi & Co.",
+  },
   description: DESCRIPTION,
-  alternates: { canonical: "/" },
   // Only ask Google to list the site when it is on the real domain
   robots: IS_LIVE_SITE
     ? { index: true, follow: true }
@@ -37,12 +42,12 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "/",
     siteName: "Arjun Joshi & Co.",
-    title: TITLE,
+    title: `${TITLE} | Arjun Joshi & Co.`,
     description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: TITLE,
+    title: `${TITLE} | Arjun Joshi & Co.`,
     description: DESCRIPTION,
   },
 };
@@ -61,7 +66,18 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <StructuredData />
         <Preloader />
-        <EnquiryProvider>{children}</EnquiryProvider>
+        <EnquiryProvider>
+          <a
+            href="#main-content"
+            className="skip-link sr-only focus:not-sr-only"
+          >
+            Skip to content
+          </a>
+          <Header />
+          <main id="main-content">{children}</main>
+          <Footer />
+          <MobileActionBar />
+        </EnquiryProvider>
       </body>
     </html>
   );

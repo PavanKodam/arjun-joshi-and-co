@@ -1,216 +1,170 @@
 import {
+  ArrowUpRight,
   Clock,
-  Mail,
   MapPin,
   MessageCircle,
   Navigation,
-  Phone,
   Send,
 } from "lucide-react";
 import EnquiryButton from "@/components/forms/EnquiryButton";
+import DepartmentCards from "@/components/ui/DepartmentCards";
 import { InstagramIcon } from "@/components/ui/icons";
-import Reveal from "@/components/ui/Reveal";
 import {
-  DEPARTMENTS,
   SITE,
   directionsHref,
-  formatPhone,
   mapEmbedSrc,
-  phoneHref,
   whatsappHref,
 } from "@/lib/site";
 
-const ROW_ICON =
-  "grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sand text-ink";
+const ROW = "flex gap-3.5";
 
-// The highlighted gold tag around a number or email
-const VALUE_TAG =
-  "inline-block w-fit max-w-full break-all rounded-xl bg-gold/25 px-4 py-1.5 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:bg-gold hover:shadow-md hover:shadow-gold/30";
-
-type ContactRow = {
-  id: string;
-  label: string;
-  description: string;
-  href: string;
-  value: string;
-};
-
-const PHONE_ROWS: ContactRow[] = DEPARTMENTS.map((dept) => ({
-  id: dept.id,
-  label: dept.label,
-  description: dept.description,
-  href: phoneHref(dept.phone),
-  value: formatPhone(dept.phone),
-}));
-
-const EMAIL_ROWS: ContactRow[] = DEPARTMENTS.map((dept) => ({
-  id: dept.id,
-  label: dept.label,
-  description: dept.description,
-  href: `mailto:${dept.email}`,
-  value: dept.email,
-}));
-
-function ContactRows({ rows }: { rows: ContactRow[] }) {
-  return (
-    <ul className="mt-2 divide-y divide-ink/10">
-      {rows.map((row, index) => (
-        <li key={row.id}>
-          <Reveal y={14} delay={index * 0.08}>
-            <div className="flex flex-col gap-1.5 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-              <div className="min-w-0">
-                <p className="font-medium text-ink">{row.label}</p>
-                <p className="text-xs text-charcoal/75">{row.description}</p>
-              </div>
-              <a href={row.href} className={VALUE_TAG}>
-                {row.value}
-              </a>
-            </div>
-          </Reveal>
-        </li>
-      ))}
-    </ul>
-  );
-}
+const ICON =
+  "grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sand text-ink";
 
 export default function Contact() {
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden bg-cream py-14 sm:py-16 lg:py-20"
-    >
+    <section id="contact" className="bg-cream py-12 sm:py-16 lg:py-20">
       <div className="site-container">
-        <Reveal className="max-w-2xl">
-          <h2 className="font-display text-3xl leading-tight text-ink sm:text-4xl">
-            Visit Us or Get in Touch
-          </h2>
-          <p className="mt-4 leading-relaxed text-charcoal/80">
-            Call, message or drop by our Bhiwandi office. We are happy to
-            answer your questions and help you explore suitable options.
-          </p>
-        </Reveal>
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-12">
+          <div>
+            <h2 className="text-balance font-display text-2xl leading-tight text-ink sm:text-3xl">
+              Talk to the right team
+            </h2>
+            <p className="mt-3 text-pretty text-sm leading-relaxed text-charcoal/80 sm:text-base">
+              Call, message or drop by our Bhiwandi office. Each team handles a
+              different kind of question, so you reach someone who can help.
+            </p>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
-          <Reveal x={-30} y={0}>
-            <ul className="space-y-6">
-              <li className="flex gap-4">
-                <span className={ROW_ICON}>
-                  <Phone size={20} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="font-display text-lg text-ink">Call us</p>
-                  <ContactRows rows={PHONE_ROWS} />
-                </div>
-              </li>
-
-              <li className="flex gap-4">
-                <span className={ROW_ICON}>
-                  <Mail size={20} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="font-display text-lg text-ink">Email us</p>
-                  <ContactRows rows={EMAIL_ROWS} />
-                </div>
-              </li>
-
-              <li className="flex gap-4">
-                <span className={ROW_ICON}>
-                  <MapPin size={20} />
-                </span>
-                <div>
-                  <p className="font-display text-lg text-ink">Office address</p>
-                  <address className="mt-1 not-italic leading-relaxed text-charcoal">
-                    {SITE.addressLines.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </address>
-                </div>
-              </li>
-
-              <li className="flex gap-4">
-                <span className={ROW_ICON}>
-                  <Clock size={20} />
-                </span>
-                <div>
-                  <p className="font-display text-lg text-ink">Office timings</p>
-                  <dl className="mt-1 space-y-0.5 text-charcoal">
-                    {SITE.hours.map((slot) => (
-                      <div key={slot.days} className="flex flex-wrap gap-x-2">
-                        <dt className="font-medium">{slot.days}:</dt>
-                        <dd>{slot.time}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                  <p className="mt-1 text-xs text-charcoal/75">
-                    Timings may differ during holidays.
-                  </p>
-                </div>
-              </li>
-
-              <li className="flex gap-4">
-                <span className={ROW_ICON}>
-                  <InstagramIcon size={20} />
-                </span>
-                <div>
-                  <p className="font-display text-lg text-ink">Instagram</p>
-                  <a
-                    href={SITE.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-1 block text-charcoal underline decoration-gold decoration-2 underline-offset-4 transition hover:text-ink"
-                  >
-                    {SITE.instagramHandle}
-                  </a>
-                </div>
-              </li>
-            </ul>
-
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <EnquiryButton className="shine inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-semibold text-ink shadow-md shadow-gold/30 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/50">
-                <Send size={18} />
+            <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap">
+              <EnquiryButton className="shine inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-semibold text-ink shadow-md shadow-gold/30 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/50">
+                <Send size={17} />
                 Send an Enquiry
               </EnquiryButton>
               <a
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/30 px-6 py-3 font-semibold text-ink transition hover:border-ink hover:bg-ink hover:text-cream"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-ink/25 px-6 py-3 font-semibold text-ink transition hover:border-ink hover:bg-white"
               >
-                <MessageCircle size={18} />
-                Chat on WhatsApp
+                <MessageCircle size={17} />
+                WhatsApp
               </a>
               <a
                 href={directionsHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/30 px-6 py-3 font-semibold text-ink transition hover:border-ink hover:bg-ink hover:text-cream"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-ink/25 px-6 py-3 font-semibold text-ink transition hover:border-ink hover:bg-white"
               >
-                <Navigation size={18} />
-                Get Directions
+                <Navigation size={17} />
+                Directions
               </a>
             </div>
-          </Reveal>
 
-          <Reveal x={30} y={0} delay={0.1}>
-            <div className="relative">
-              <div
-                aria-hidden
-                className="absolute -bottom-3 -right-3 h-full w-full rounded-4xl border-2 border-gold/60"
-              />
-              <div className="relative overflow-hidden rounded-4xl bg-sand shadow-lg ring-1 ring-ink/10">
-                <iframe
-                  title="Arjun Joshi & Co. office location on Google Maps"
-                  src={mapEmbedSrc}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                  className="block h-80 w-full border-0 sm:h-96 lg:h-[28rem]"
-                />
+            <div className="mt-8">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-bronze">
+                Department contacts
+              </h3>
+              <div className="mt-3">
+                <DepartmentCards />
               </div>
             </div>
-          </Reveal>
+
+            <div className="mt-6 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-ink/5 sm:p-6">
+              <ul className="space-y-5">
+                <li className={ROW}>
+                  <span className={ICON}>
+                    <MapPin size={19} />
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-base text-ink">
+                      Office address
+                    </h3>
+                    <address className="mt-1 text-sm not-italic leading-relaxed text-charcoal/80">
+                      {SITE.addressLines.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </address>
+                    <a
+                      href={directionsHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-bronze hover:text-ink"
+                    >
+                      Get directions
+                      <ArrowUpRight size={14} />
+                    </a>
+                  </div>
+                </li>
+
+                <li className={ROW}>
+                  <span className={ICON}>
+                    <Clock size={19} />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-base text-ink">
+                      Office timings
+                    </h3>
+                    <dl className="mt-1 space-y-0.5 text-sm text-charcoal/80">
+                      {SITE.hours.map((slot) => (
+                        <div key={slot.days}>
+                          <dt className="inline font-medium text-charcoal">
+                            {slot.days}:{" "}
+                          </dt>
+                          <dd className="inline">{slot.time}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                    <p className="mt-1 text-xs text-charcoal/60">
+                      Timings may differ during holidays.
+                    </p>
+                  </div>
+                </li>
+
+                <li className={ROW}>
+                  <span className={ICON}>
+                    <InstagramIcon size={19} />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-base text-ink">
+                      Instagram
+                    </h3>
+                    <a
+                      href={SITE.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 block text-sm text-charcoal/80 underline decoration-gold decoration-2 underline-offset-4 transition hover:text-ink"
+                    >
+                      {SITE.instagramHandle}
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="relative overflow-hidden rounded-3xl bg-sand shadow-lg ring-1 ring-ink/10">
+              <iframe
+                title="Arjun Joshi & Co. office location on Google Maps"
+                src={mapEmbedSrc}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                className="block h-[20rem] w-full border-0 sm:h-[26rem] lg:h-[34rem]"
+              />
+            </div>
+            <div className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-ink/5">
+              <p className="font-display text-lg text-ink">
+                Visiting the office?
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-charcoal/75">
+                We are at Surya Excellency, Balaji Nagar, Narpoli. Call ahead
+                and we will keep the time free for you.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

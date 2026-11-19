@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import Counter from "@/components/ui/Counter";
@@ -11,27 +12,23 @@ const HEADLINE = [
   { text: "Secure What Comes Next.", accent: true },
 ];
 
-type Stat = { label: string } & (
-  | { value: number; suffix?: string }
-  | { text: string }
-);
-
-const STATS: Stat[] = [
-  { value: 20, suffix: "+", label: "Years Experience" },
-  { text: "Multiple", label: "Insurance & Investment Solutions" },
-  { text: "Personalized", label: "End-to-end policy and benefits support." },
+const STATS = [
+  { value: 20, suffix: "+", label: "Years experience" },
+  { value: 500, suffix: "+", label: "Trusted clients" },
+  { value: 350, suffix: "+", label: "Claims settled" },
 ];
 
-// Start the hero animation after the loading screen has lifted
-const START = 2.4;
+// Start the hero animation just as the loading screen lifts
+const START = 1.8;
 
 export default function Hero() {
   const reduce = useReducedMotion();
-  const { openEnquiry } = useEnquiry(); 
+  const { openEnquiry } = useEnquiry();
+
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-cream pb-12 pt-20 sm:pb-16 sm:pt-32 lg:pb-24 lg:pt-44"
+      className="relative overflow-hidden bg-cream pb-14 pt-24 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-36"
     >
       {/* Slow-moving background shapes */}
       <motion.div
@@ -53,21 +50,21 @@ export default function Hero() {
         transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="site-container relative grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-          <div>
+      <div className="site-container relative grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+        <div>
           <motion.p
-            className="mb-4 flex items-center gap-3 text-sm font-medium text-bronze sm:text-base"
+            className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-bronze sm:text-sm"
             initial={reduce ? false : { opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: START - 0.2 }}
           >
-            <span aria-hidden className="h-px w-10 bg-bronze" />
+            <span aria-hidden className="h-px w-9 bg-bronze" />
             Live Protected.
           </motion.p>
 
-          <h1 className="font-display text-[1.75rem] leading-[1.15] text-ink sm:text-4xl lg:text-[2.6rem]">
+          <h1 className="text-balance font-display text-[1.7rem] leading-[1.08] text-ink min-[400px]:text-[1.95rem] sm:text-[2.5rem] lg:text-[2.75rem] xl:text-[3rem]">
             {HEADLINE.map((line, i) => (
-              <span key={line.text} className="block overflow-hidden pb-1.5">
+              <span key={line.text} className="block overflow-hidden pb-1">
                 <motion.span
                   className="block"
                   initial={reduce ? false : { y: "110%" }}
@@ -81,7 +78,6 @@ export default function Hero() {
                   {line.accent ? (
                     <span className="relative block text-bronze">
                       {line.text}
-                      {/* Golden light sweeping across the text */}
                       <span
                         aria-hidden
                         className="gold-shimmer pointer-events-none absolute inset-0"
@@ -98,27 +94,26 @@ export default function Hero() {
           </h1>
 
           <motion.p
-            className="mt-5 max-w-xl text-sm leading-relaxed text-charcoal sm:text-base"
+            className="mt-5 max-w-xl text-pretty text-sm leading-relaxed text-charcoal sm:text-base"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: START + 0.4 }}
+            transition={{ duration: 0.8, delay: START + 0.35 }}
           >
             Your family’s health, your future, your vehicles and your valuable
             assets deserve the right protection. Let Arjun Joshi &amp; Co. help
-            you explore insurance and investment solutions suited to your
-            needs.
+            you explore insurance and investment solutions suited to your needs.
           </motion.p>
 
           <motion.div
             className="mt-7 flex flex-col gap-3 sm:flex-row sm:gap-4"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: START + 0.6 }}
+            transition={{ duration: 0.8, delay: START + 0.55 }}
           >
             <button
               type="button"
               onClick={() => openEnquiry()}
-              className="shine group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink shadow-md shadow-gold/30 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/50 sm:text-base"
+              className="shine group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink shadow-md shadow-gold/30 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/50 sm:text-base"
             >
               Get a Free Consultation
               <ArrowRight
@@ -126,52 +121,55 @@ export default function Hero() {
                 className="transition-transform group-hover:translate-x-1"
               />
             </button>
-            <a
-              href="#services"
-              className="inline-flex items-center justify-center rounded-full border border-ink/30 px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink hover:bg-ink hover:text-cream sm:text-base"
+            <Link
+              href="/services"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink/25 px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink hover:bg-ink hover:text-cream sm:text-base"
             >
               Explore Our Services
-            </a>
+            </Link>
           </motion.div>
 
-          <dl className="mt-8 grid max-w-xl grid-cols-3 gap-4 border-t border-ink/15 pt-6 sm:mt-10">
+          <motion.dl
+            className="mt-9 grid grid-cols-3 gap-2 border-t border-ink/15 pt-6 sm:gap-4"
+            initial={reduce ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: START + 0.7 }}
+          >
             {STATS.map((stat) => (
-              <div key={stat.label} className="flex flex-col-reverse self-start">
-                <dt className="text-xs text-charcoal sm:text-sm">
+              <div
+                key={stat.label}
+                className="flex flex-col-reverse rounded-2xl bg-white/70 p-3 ring-1 ring-ink/5 sm:p-4"
+              >
+                <dt className="mt-1 text-[0.68rem] leading-tight text-charcoal sm:text-xs">
                   {stat.label}
                 </dt>
-                <dd className="font-display text-2xl text-ink sm:text-3xl">
-                 {"value" in stat ? (
+                <dd className="font-display text-2xl leading-none text-ink sm:text-3xl">
                   <Counter
                     to={stat.value}
                     suffix={stat.suffix}
-                    startAfter={START + 0.6}
+                    startAfter={START + 0.7}
                     repeat
                   />
-                 ):<span className="text-2xl text-ink sm:text-3xl">{stat.text}</span>}
                 </dd>
               </div>
             ))}
-          </dl>
+          </motion.dl>
 
-          <p className="mt-5 text-xs text-charcoal/75">
+          <p className="mt-4 text-xs leading-relaxed text-charcoal/70">
             *Subject to insurer requirements, verification and approval.
           </p>
         </div>
 
-        {/* Photo: first on mobile, on the right on desktop */}
+        {/* Photo appears below the copy on phones, beside it on desktop */}
         <motion.div
-          className="relative order-first mb-6 lg:order-last lg:mb-0"
-          initial={reduce ? false : { scale: 0.96 }}
-          animate={{ scale: 1 }}
+          className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none"
+          initial={reduce ? false : { scale: 0.97, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.9, delay: START + 0.2, ease: "easeOut" }}
         >
-          {/* Gold outline that gently pulses */}
-          <motion.div
+          <div
             aria-hidden
-            className="absolute -bottom-3 -right-3 h-full w-full rounded-4xl border-2 border-gold"
-            animate={reduce ? undefined : { opacity: [0.35, 1, 0.35] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -bottom-2.5 -right-2.5 h-full w-full rounded-3xl border-2 border-gold sm:-bottom-3 sm:-right-3 sm:rounded-4xl"
           />
 
           <PhotoFrame
@@ -179,17 +177,16 @@ export default function Hero() {
             alt="A happy family protected by the right insurance cover"
             priority
             imageClassName="object-cover object-[55%_center]"
-            className="relative aspect-16/10 w-full rounded-4xl shadow-xl shadow-ink/10 sm:aspect-16/11"
-            fallback={<ShieldCheck size={72} />}
+            className="relative aspect-4/3 w-full rounded-3xl shadow-xl shadow-ink/10 sm:aspect-16/11 sm:rounded-4xl"
+            fallback={<ShieldCheck size={64} />}
           />
 
-          {/* Golden light sweeping across the photo */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 overflow-hidden rounded-4xl"
+            className="pointer-events-none absolute inset-0 hidden overflow-hidden rounded-3xl sm:block sm:rounded-4xl"
           >
             <motion.div
-              className="absolute inset-y-0 left-0 w-2/5 bg-linear-to-r from-transparent via-[#ffe9ad]/40 to-transparent"
+              className="absolute inset-y-0 left-0 w-2/5 bg-linear-to-r from-transparent via-[#ffe9ad]/35 to-transparent"
               initial={{ x: "-150%" }}
               animate={reduce ? undefined : { x: ["-150%", "350%"] }}
               transition={{
@@ -201,19 +198,14 @@ export default function Hero() {
             />
           </div>
 
-          {/* Floating badge */}
-          <motion.div
-            className="absolute -bottom-6 left-4 flex max-w-68 items-center gap-3 rounded-2xl bg-white p-4 shadow-lg shadow-gold/30 sm:-left-6"
-            animate={reduce ? undefined : { y: [0, -8, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gold/30 text-bronze">
-              <ShieldCheck size={20} />
+          <div className="absolute bottom-3 left-3 flex max-w-[15rem] items-center gap-2.5 rounded-2xl bg-white/95 p-3 shadow-lg shadow-gold/25 backdrop-blur sm:bottom-4 sm:left-4 sm:gap-3 sm:p-4">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold/30 text-bronze sm:h-10 sm:w-10">
+              <ShieldCheck size={19} />
             </span>
-            <p className="font-display text-base leading-snug text-ink">
-              Get Your Insurance Policy Within Minutes*
+            <p className="font-display text-sm leading-snug text-ink sm:text-base">
+              Get your policy within minutes*
             </p>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -159,3 +159,5 @@ export const SERVICES: Service[] = [
     ],
   },
 ];
+export const getService = (id: string) =>
+  SERVICES.find((service) => service.id === id);
