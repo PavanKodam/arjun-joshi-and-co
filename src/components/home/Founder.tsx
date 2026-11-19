@@ -19,7 +19,7 @@ export default function Founder() {
   return (
     <section id="founder" className="overflow-hidden bg-sand/60 py-14 sm:py-20 lg:py-24">
       <div className="site-container grid items-center gap-10 lg:grid-cols-[1fr_0.8fr] lg:gap-14">
-        <Reveal x={-30} y={0} className="order-2 lg:order-1">
+        <Reveal x={-30} y={0} className="order-1">
           <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-bronze sm:text-sm">
             <span aria-hidden className="h-px w-8 bg-bronze" />
             Our founder
@@ -80,7 +80,7 @@ export default function Founder() {
           </dl>
         </Reveal>
 
-        <Reveal x={30} y={0} delay={0.1} className="order-1 lg:order-2">
+        <Reveal x={30} y={0} delay={0.1} className="order-2">
           <div className="relative mx-auto max-w-[16rem] sm:max-w-xs lg:max-w-md">
             <div
               aria-hidden
@@ -90,8 +90,8 @@ export default function Founder() {
               src="/images/founder.webp"
               alt="Arjun Joshi, Founder and Owner of Arjun Joshi & Co."
               sizes="(min-width: 1024px) 40vw, 90vw"
-              className="relative aspect-4/5 rounded-3xl shadow-lg sm:rounded-4xl"
-              imageClassName="object-cover object-top"
+              className="relative aspect-[7/8] w-full rounded-3xl shadow-lg sm:rounded-4xl"
+              imageClassName="object-cover object-center"
               fallback={<UserRound size={80} />}
             />
             <div className="absolute bottom-2 left-2 rounded-lg bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur sm:bottom-3 sm:left-3 sm:px-4 sm:py-2">

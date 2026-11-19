@@ -9,14 +9,8 @@ import {
   Layers,
   UserCheck,
 } from "lucide-react";
-import Counter from "@/components/ui/Counter";
 import Reveal from "@/components/ui/Reveal";
-
-const STATS = [
-  { value: 20, label: "Years of Experience" },
-  { value: 500, label: "Trusted Clients" },
-  { value: 350, label: "Claims Settled" },
-];
+import YearsHighlight from "@/components/ui/YearsHighlight";
 
 const FEATURES = [
   {
@@ -69,30 +63,13 @@ export default function WhyChooseUs({ showLink = false }: WhyChooseUsProps) {
             Why Choose Arjun Joshi &amp; Co.?
           </h2>
           <p className="mt-4 text-pretty text-sm leading-relaxed text-charcoal/80 sm:text-base">
-            Two decades of industry experience, honest guidance and a simple
-            enquiry process, so you can choose protection with confidence.
+            With <YearsHighlight /> of industry experience, honest guidance and
+            a simple enquiry process, you can choose protection with confidence.
           </p>
         </Reveal>
 
-        {/* Big numbers */}
-        <dl className="mt-8 grid grid-cols-3 gap-2 sm:mt-10 sm:gap-5">
-          {STATS.map((stat) => (
-            <div
-              key={stat.label}
-              className="shine flex flex-col-reverse rounded-2xl bg-linear-to-br from-gold/30 via-sand to-cream p-3 text-center shadow-sm ring-1 ring-gold/30 sm:rounded-3xl sm:p-7"
-            >
-              <dt className="mt-1.5 text-[0.7rem] font-medium leading-tight text-charcoal sm:text-sm">
-                {stat.label}
-              </dt>
-              <dd className="font-display text-3xl leading-none text-ink sm:text-5xl lg:text-6xl">
-                <Counter to={stat.value} suffix="+" repeat />
-              </dd>
-            </div>
-          ))}
-        </dl>
-
         {/* Feature cards */}
-        <ul className="mt-4 grid gap-3 sm:mt-6 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+        <ul className="mt-9 grid gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {FEATURES.map((feature, index) => {
             const Icon = feature.icon;
             return (

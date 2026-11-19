@@ -16,26 +16,77 @@
 # next.js
 /.next/
 /out/
+.turbo/
+.cache/
 
 # production
 /build
+/dist/
 
 # misc
 .DS_Store
-*.pem
+Thumbs.db
+Desktop.ini
+*.bak
+*.tmp
+*.temp
+*.pid
 
-# debug
+# debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
+logs/
 
-# env files (can opt-in for committing if needed)
-.env*
+# environment files - never commit real credentials
+.env
+.env.*
+*.env
+*.env.*
+.envrc
 
-# vercel
+# allow the placeholder-only template (never put real values in it)
+!.env.example
+
+# stray file created by mistake, do not commit
+\!.env.example
+
+# certificates and private keys
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.crt
+*.cer
+*.der
+
+# registry and credential files
+.npmrc
+.yarnrc.yml
+.pypirc
+.netrc
+_netrc
+.git-credentials
+
+# hosting and deployment metadata
 .vercel
+.netlify
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# editors and local history
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.fleet/
+.history/
+*.swp
+*.swo
+*~

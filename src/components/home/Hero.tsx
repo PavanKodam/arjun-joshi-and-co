@@ -3,19 +3,13 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, ShieldCheck } from "lucide-react";
-import Counter from "@/components/ui/Counter";
 import PhotoFrame from "@/components/ui/PhotoFrame";
+import YearsHighlight from "@/components/ui/YearsHighlight";
 import { useEnquiry } from "@/components/forms/EnquiryProvider";
 
 const HEADLINE = [
   { text: "Protect What Matters.", accent: false },
   { text: "Secure What Comes Next.", accent: true },
-];
-
-const STATS = [
-  { value: 20, suffix: "+", label: "Years experience" },
-  { value: 500, suffix: "+", label: "Trusted clients" },
-  { value: 350, suffix: "+", label: "Claims settled" },
 ];
 
 // Start the hero animation just as the loading screen lifts
@@ -129,31 +123,15 @@ export default function Hero() {
             </Link>
           </motion.div>
 
-          <motion.dl
-            className="mt-9 grid grid-cols-3 gap-2 border-t border-ink/15 pt-6 sm:gap-4"
+          <motion.p
+            className="mt-7 max-w-xl border-l-2 border-gold pl-4 text-sm leading-relaxed text-charcoal sm:text-base"
             initial={reduce ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: START + 0.7 }}
           >
-            {STATS.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col-reverse rounded-2xl bg-white/70 p-3 ring-1 ring-ink/5 sm:p-4"
-              >
-                <dt className="mt-1 text-[0.68rem] leading-tight text-charcoal sm:text-xs">
-                  {stat.label}
-                </dt>
-                <dd className="font-display text-2xl leading-none text-ink sm:text-3xl">
-                  <Counter
-                    to={stat.value}
-                    suffix={stat.suffix}
-                    startAfter={START + 0.7}
-                    repeat
-                  />
-                </dd>
-              </div>
-            ))}
-          </motion.dl>
+            With <YearsHighlight /> of experience in the insurance industry, we
+            help families and businesses in Bhiwandi protect what matters most.
+          </motion.p>
 
           <p className="mt-4 text-xs leading-relaxed text-charcoal/70">
             *Subject to insurer requirements, verification and approval.
@@ -176,8 +154,8 @@ export default function Hero() {
             src="/images/hero-family.webp"
             alt="A happy family protected by the right insurance cover"
             priority
-            imageClassName="object-cover object-[55%_center]"
-            className="relative aspect-4/3 w-full rounded-3xl shadow-xl shadow-ink/10 sm:aspect-16/11 sm:rounded-4xl"
+            imageClassName="object-cover object-center"
+            className="relative aspect-video w-full rounded-3xl shadow-xl shadow-ink/10 sm:rounded-4xl"
             fallback={<ShieldCheck size={64} />}
           />
 

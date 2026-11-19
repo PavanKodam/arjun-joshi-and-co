@@ -15,7 +15,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "About Us",
   description:
-    "Meet Arjun Joshi & Co., an insurance and investment management agency in Bhiwandi with over 20 years of industry experience and 500+ trusted clients.",
+    "Meet Arjun Joshi & Co., an insurance and investment management agency in Bhiwandi with over 20 years of industry experience.",
   path: "/about",
 });
 
